@@ -25,9 +25,10 @@ public interface Duration extends Comparable<Duration> {
    * <p>The template is a string that may contain both uninterpreted
    * characters and <i>format specifiers</i>, which are special two-character
    * codes starting with a {@code %} character. This method returns a copy of
-   * the template string in which the format specifiers are replaced by
-   * representations of the indicated value for {@code this} duration,
-   *
+   * the template string in which the format specifiers are replaced from
+   * left to right by representations of the indicated values for {@code
+   * this} duration and the other (uninterpreted) characters are copied
+   * unchanged.
    *
    * <p>In cases where multiple format specifiers overlap (<i>e.g.,</i>
    * {@code "%%t"}), the leftmost specifiers take precedence (so the
@@ -61,8 +62,13 @@ public interface Duration extends Comparable<Duration> {
    *   <caption>Format specifiers</caption>
    * </table>
    *
+   * <p>A template string containing a {@code %} character followed
+   * by a character that is not among the codes defined above is malformed,
+   * and the method throws an {@link IllegalArgumentException} in this case.
+   *
    * @param template the template
    * @return the formatted string
+   * @throws IllegalArgumentException if {@code template} is malformed
    */
   String format(String template);
 
