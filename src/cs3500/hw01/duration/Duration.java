@@ -19,21 +19,40 @@ package cs3500.hw01.duration;
  */
 public interface Duration extends Comparable<Duration> {
   /**
-   * Formats a duration as a string by filling in format specifiers in the
-   * template.
+   * Formats a duration as a string by substituting for format
+   * specifiers in the template.
    *
-   * <p>The template is a string that may contain both uninterpreted
-   * characters and <i>format specifiers</i>, which are special two-character
-   * codes starting with a {@code %} character. This method returns a copy of
-   * the template string in which the format specifiers are replaced from
-   * left to right by representations of the indicated values for {@code
-   * this} duration and the other (uninterpreted) characters are copied
-   * unchanged.
+   * <p>The template is a string that may contain both <i>fixed
+   * text</i> and some number of <i>format specifiers</i>, which are
+   * special two-character codes starting with a {@code %} character.
+   * This method returns a string that is like the template string,
+   * with the fixed text copied unchanged and the format specifiers
+   * replaced printed representations of the indicated values for
+   * {@code this} duration.
    *
-   * <p>In cases where multiple format specifiers overlap (<i>e.g.,</i>
-   * {@code "%%t"}), the leftmost specifiers take precedence (so the
-   * result would be {@code "%t"}). Another way to think of this is that the
-   * format specifiers are interpreted from left to right.
+   * <p>More precisely, a template is a sequence of uninterpreted
+   * characters and two-character format specifiers. An uninterpreted
+   * character may be any character but {@code '%'}. A format specifier
+   * may be any of the two-character codes defined in the table below,
+   * and nothing else. The result string is the concatenation of the
+   * meanings of each of the elements of the template sequence, where
+   * the meaning of an uninterpreted character is itself, and the
+   * meaning of a format specifier is a string as defined in the table
+   * below.
+   *
+   * <p>The above implies that in cases where two format specifiers
+   * appear to overlap (<i>e.g.,</i> {@code "%%t"}), the left-mosts
+   * specifier take precedence (so the result in this case would be
+   * {@code "%t"}). Alternatively, we could say that the format
+   * specifiers are interpreted from left to right, and the result of
+   * converting a specifier is never interpreted a second time.
+   *
+   * <p>A template is malformed if it doesn't meet the definition of
+   * template above. Another way to think of this is that in a
+   * well-formed template, every {@code '%'} character is followed by
+   * one of the eight characters that follow {@code %} in the table
+   * below, except when it is the following character for another
+   * {@code %}.
    *
    * <table>
    *   <thead>
@@ -61,10 +80,6 @@ public interface Duration extends Comparable<Duration> {
    *   <tr><td>{@code %%}</td><td>a literal percent sign ({@code %})</td></tr>
    *   <caption>Format specifiers</caption>
    * </table>
-   *
-   * <p>A template string containing a {@code %} character followed
-   * by a character that is not among the codes defined above is malformed,
-   * and the method throws an {@link IllegalArgumentException} in this case.
    *
    * @param template the template
    * @return the formatted string
