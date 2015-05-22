@@ -27,7 +27,7 @@ public interface Duration extends Comparable<Duration> {
    * special two-character codes starting with a {@code %} character.
    * This method returns a string that is like the template string,
    * with the fixed text copied unchanged and the format specifiers
-   * replaced printed representations of the indicated values for
+   * replaced by textual representations of the indicated values for
    * {@code this} duration.
    *
    * <p>More precisely, a template is a sequence of uninterpreted
@@ -41,8 +41,8 @@ public interface Duration extends Comparable<Duration> {
    * below.
    *
    * <p>The above implies that in cases where two format specifiers
-   * appear to overlap (<i>e.g.,</i> {@code "%%t"}), the left-mosts
-   * specifier take precedence (so the result in this case would be
+   * appear to overlap (<i>e.g.,</i> {@code "%%t"}), the left-most
+   * specifier takes precedence (so the result in this case would be
    * {@code "%t"}). Alternatively, we could say that the format
    * specifiers are interpreted from left to right, and the result of
    * converting a specifier is never interpreted a second time.
