@@ -4,7 +4,6 @@
 //// You don't need to submit it, but you should make sure it compiles.
 //// Further explanation appears below.
 ////
-package cs3500.hw01;
 
 import cs3500.hw01.duration.Duration;
 import cs3500.hw01.publication.*;
