@@ -43,6 +43,8 @@ public final class HmsDuration extends AbstractDuration {
     return new HmsDuration(seconds);
   }
 
+
+
   @Override
   public long inSeconds() {
     return inSeconds(hours, minutes, seconds);

@@ -40,6 +40,7 @@ public final class CompactDuration extends AbstractDuration {
     return new CompactDuration(seconds);
   }
 
+
   @Override
   public long inSeconds() {
     return inSeconds;
